@@ -48,12 +48,12 @@ const goodWord = async() => {
 
 // 天气信息
 const weatherInfo = async() => {
-  const weather = await API.getWeather('蚌埠')
+  const weather = await API.getWeather('杭州')
   if (weather) {
     const lunarInfo = await API.getLunarDate(weather.date)
     const oneWord = await API.getOneWord()
     const template = textCardTemplate({ ...weather, lunarInfo, oneWord })
-    console.log('weatherInfo', template)
+    console.log('weatherInfo template', template)
 
     // 发送消息
     await wxNotify(template)

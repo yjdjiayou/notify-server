@@ -6,7 +6,8 @@ import { getTian } from '../utils/http'
  */
 enum LoveMsgURL {
   // 天气
-  weather = 'https://v0.yiketianqi.com/api?unescape=1&version=v61&appid=43656176&appsecret=I42og6Lm',
+  // weather = 'http://api.tianapi.com/tianqi/index?key=0317f8563b52a513549bc1592fbb244f',
+  weather = 'https://v0.yiketianqi.com/api?unescape=1&version=v61&appid=86344586&appsecret=HGFlIBd7',
   // 每日简报
   dailyBriefing = 'http://api.tianapi.com/bulletin/index',
   // 今日头条
@@ -54,14 +55,13 @@ class API {
     try {
       const response = await axios({ url: LoveMsgURL.weather, params: { city: city_name } })
       const result = response.data
+      console.log('result', result)
       // 预警天气
-      if (!result.alarm.alarm_type && !result.alarm_content)
-        result.alarm = null
+      if (!result.alarm.alarm_type && !result.alarm_content) result.alarm = null
 
       console.log('天气请求成功==>', city_name)
       return response.data
-    }
-    catch (error) {
+    } catch (error) {
       console.log('天气请求失败==>', error)
       return null
     }
@@ -138,8 +138,7 @@ class API {
     try {
       const response = await axios(LoveMsgURL.oneWord, { timeout: 30000 })
       return response.data
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error)
       return null
     }
